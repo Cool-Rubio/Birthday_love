@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Cumpleaños - Elegante</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            position: relative;
+            padding: 0.5rem;
+        }
+
+        .main-container {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .birthday-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            width: 100%;
+            max-width: 400px;
+            animation: gentleFloat 4s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+            margin: 0.5rem;
+            transform-origin: center center;
+        }
+
+        .birthday-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        .greeting-text {
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: #333;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .main-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+
+        .cake-section {
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .elegant-cake {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 1rem;
+            animation: cakeGlow 2s ease-in-out infinite alternate;
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
+        }
+
+        .candle-container {
+            display: flex;
+            justify-content: center;
+            gap: clamp(4px, 2vw, 8px);
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .elegant-candle {
+            width: clamp(4px, 1.5vw, 6px);
+            height: clamp(25px, 8vw, 35px);
+            background: linear-gradient(to bottom, #ffd700, #ffb347);
+            border-radius: 3px;
+            position: relative;
+            animation: candleFlicker 2s ease-in-out infinite;
+            box-shadow: 0 2px 10px rgba(255, 179, 71, 0.4);
+        }
+
+        .elegant-candle::after {
+            content: '💫';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: clamp(0.6rem, 2vw, 0.8rem);
+            animation: flameGlow 1s ease-in-out infinite alternate;
+        }
+
+        .age-display {
+            font-size: 4rem;
+            font-weight: 700;
+            color: #667eea;
+            text-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            margin: 1rem 0;
+            animation: ageShine 3s ease-in-out infinite;
+        }
+
+        .birthday-message {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.6;
+            margin: 1.5rem 0;
+            font-weight: 400;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .birthday-message h2 {
+            font-size: 1.3rem;
+            color: #667eea;
+            margin-bottom: 0.8rem;
+        }
+
+        .celebration-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: clamp(12px, 4vw, 15px) clamp(30px, 8vw, 40px);
+            border-radius: 50px;
+            font-size: clamp(0.9rem, 3vw, 1rem);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: auto;
+            min-width: 150px;
+        }
+
+        .celebration-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .celebration-button:hover::before {
+            left: 100%;
+        }
+
+        .celebration-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .floating-element {
+            position: absolute;
+            animation: floatAround 8s ease-in-out infinite;
+            opacity: 0.7;
+            z-index: 1;
+        }
+
+        .balloon {
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            animation: balloonDance 6s ease-in-out infinite;
+        }
+
+        .gift {
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            animation: giftFloat 5s ease-in-out infinite;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: clamp(4px, 1.5vw, 6px);
+            height: clamp(4px, 1.5vw, 6px);
+            background: radial-gradient(circle, #fff, #667eea);
+            border-radius: 50%;
+            animation: sparkleShine 2s linear infinite;
+            z-index: 1;
+        }
+
+        .signature {
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            font-size: clamp(0.7rem, 2.5vw, 0.9rem);
+            color: rgba(255, 255, 255, 0.7);
+            font-style: italic;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 0.3rem;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .main-container {
+                width: 100%;
+                display: block;
+            }
+
+            .birthday-card {
+                margin: 0 auto;
+                padding: 1.2rem;
+                max-width: 350px;
+                animation: none; /* Desactivar float en móvil */
+                transform: none; /* Asegurar que no haya rotación */
+            }
+
+            .greeting-text {
+                font-size: 1.5rem;
+                margin-bottom: 0.3rem;
+            }
+
+            .main-title {
+                font-size: 2.2rem;
+                margin-bottom: 1rem;
+            }
+
+            .elegant-cake {
+                font-size: 2.5rem;
+            }
+
+            .age-display {
+                font-size: 3.5rem;
+                margin: 0.8rem 0;
+            }
+
+            .birthday-message {
+                font-size: 0.9rem;
+                margin: 1rem 0;
+            }
+
+            .birthday-message h2 {
+                font-size: 1.2rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .celebration-button {
+                padding: 12px 25px;
+                font-size: 0.9rem;
+                margin-top: 1rem;
+            }
+
+            .floating-element, .sparkle {
+                display: none;
+            }
+
+            .signature {
+                position: static;
+                text-align: center;
+                margin-top: 1rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .birthday-card {
+                padding: 1rem;
+                max-width: 320px;
+            }
+
+            .greeting-text {
+                font-size: 1.3rem;
+            }
+
+            .main-title {
+                font-size: 2rem;
+            }
+
+            .elegant-cake {
+                font-size: 2.2rem;
+            }
+
+            .age-display {
+                font-size: 3rem;
+            }
+
+            .candle-container {
+                gap: 3px;
+                margin: 1rem 0;
+            }
+
+            .elegant-candle {
+                width: 4px;
+                height: 25px;
+            }
+
+            .birthday-message {
+                font-size: 0.85rem;
+            }
+
+            .celebration-button {
+                width: 100%;
+                max-width: 180px;
+                padding: 10px 20px;
+            }
+        }
+
+        /* Animaciones */
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes titleGlow {
+            0% { text-shadow: 0 0 20px rgba(102, 126, 234, 0.5); }
+            100% { text-shadow: 0 0 30px rgba(118, 75, 162, 0.8); }
+        }
+
+        @keyframes cakeGlow {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+
+        @keyframes candleFlicker {
+            0%, 100% { transform: scaleY(1); opacity: 1; }
+            50% { transform: scaleY(1.1); opacity: 0.9; }
+        }
+
+        @keyframes flameGlow {
+            0% { transform: translateX(-50%) scale(1); }
+            100% { transform: translateX(-50%) scale(1.2); }
+        }
+
+        @keyframes ageShine {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); text-shadow: 0 5px 25px rgba(102, 126, 234, 0.6); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes balloonDance {
+            0%, 100% { transform: translateY(0px) rotate(-2deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+        }
+
+        @keyframes giftFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes floatAround {
+            0%, 100% { transform: translateX(0px) translateY(0px); }
+            25% { transform: translateX(20px) translateY(-10px); }
+            50% { transform: translateX(0px) translateY(-20px); }
+            75% { transform: translateX(-20px) translateY(-10px); }
+        }
+
+        @keyframes sparkleShine {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Elementos flotantes decorativos (ocultos en móvil) -->
+    <div class="floating-element balloon" style="top: 15%; left: 10%; animation-delay: 0s;">🎈</div>
+    <div class="floating-element balloon" style="top: 20%; right: 10%; animation-delay: 1s;">🎈</div>
+    <div class="floating-element gift" style="bottom: 20%; left: 15%; animation-delay: 0.5s;">🎁</div>
+    <div class="floating-element gift" style="bottom: 25%; right: 15%; animation-delay: 1.5s;">🎁</div>
+
+    <!-- Estrellas brillantes (ocultas en móvil) -->
+    <div class="sparkle" style="top: 25%; left: 20%; animation-delay: 0s;"></div>
+    <div class="sparkle" style="top: 60%; left: 80%; animation-delay: 1s;"></div>
+    <div class="sparkle" style="top: 40%; left: 5%; animation-delay: 0.5s;"></div>
+    <div class="sparkle" style="top: 70%; right: 10%; animation-delay: 1.5s;"></div>
+
+    <!-- Contenido principal -->
+    <div class="main-container">
+        <div class="birthday-card">
+            <p class="greeting-text">Feliz</p>
+            <h1 class="main-title">Cumpleaños</h1>
+            
+            <div class="cake-section">
+                <span class="elegant-cake">🎂</span>
+                
+                <div class="candle-container">
+                    <div class="elegant-candle"></div>
+                    <div class="elegant-candle" style="animation-delay: 0.2s;"></div>
+                    <div class="elegant-candle" style="animation-delay: 0.4s;"></div>
+                    <div class="elegant-candle" style="animation-delay: 0.6s;"></div>
+                    <div class="elegant-candle" style="animation-delay: 0.8s;"></div>
+                </div>
+                
+                <div class="age-display">19</div>
+            </div>
+            
+            <div class="birthday-message">
+                <h2>Mi amor</h2>
+                <p><i>En este día especial, celebro no solo tu cumpleaños, sino la dicha inmensa de tenerte en mi vida. 
+                    <h2></h2>¡Feliz cumpleaños, mi amor!</i></p>
+            </div>
+            
+            <button class="celebration-button" onclick="iniciarCelebracion()">
+                ✨ Celebrar ✨
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function iniciarCelebracion() {
+            const messages = [
+                "🎉 ¡Espero que te guste tu Regalo! 🎉"
+            ];
+            
+            const randomMessage = messages[0];
+            
+            // Crear un modal elegante y responsivo
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 1000;
+                backdrop-filter: blur(5px);
+                padding: 1rem;
+            `;
+            
+            const content = document.createElement('div');
+            content.style.cssText = `
+                background: white;
+                padding: 2rem;
+                border-radius: 15px;
+                text-align: center;
+                font-family: 'Poppins', sans-serif;
+                font-size: clamp(1rem, 4vw, 1.2rem);
+                color: #333;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+                animation: fadeInUp 0.5s ease-out;
+                max-width: 90%;
+                width: 100%;
+                max-width: 400px;
+            `;
+            
+            content.innerHTML = `
+                ${randomMessage}
+                <br><br>
+                <button onclick="this.parentElement.parentElement.remove()" style="
+                    background: linear-gradient(135deg, #667eea, #764ba2);
+                    color: white;
+                    border: none;
+                    padding: 10px 20px;
+                    border-radius: 25px;
+                    cursor: pointer;
+                    font-weight: 600;
+                    font-size: clamp(0.9rem, 3vw, 1rem);
+                ">Gracias ✨</button>
+            `;
+            
+            modal.appendChild(content);
+            document.body.appendChild(modal);
+        }
+
+        // Detectar si es móvil para optimizar rendimiento
+        function isMobile() {
+            return window.innerWidth <= 768;
+        }
+
+        // Ajustar animaciones según el dispositivo
+        if (isMobile()) {
+            // Reducir animaciones en móvil para mejor rendimiento
+            document.documentElement.style.setProperty('--animation-duration', '6s');
+        }
+    </script>
+</body>
+</html>
